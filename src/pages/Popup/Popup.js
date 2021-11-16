@@ -50,6 +50,7 @@ const Popup = () => {
               }}
               onClick={() => {
                 chrome.tabs.sendMessage(tabId, { message: 'clear', id: tabId });
+                setMisMatch(0);
               }}
             >
               Click here to clear overlay.

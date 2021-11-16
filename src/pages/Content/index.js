@@ -83,16 +83,17 @@ function getDiff(current) {
 getSnapshot();
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  const img = document.getElementById('change_overlay');
   if (request.message === 'start') {
-    if (document.getElementById('change_overlay') !== null && data !== null) {
+    if (img !== null && img.src !== null && data !== null) {
       chrome.runtime.sendMessage({
         message: 'data',
         data: data.misMatchPercentage,
       });
     }
-  } else if (request.message === 'clear') {
+  } else if (img !== null && request.message === 'clear') {
     data = null;
-    document.getElementById('change_overlay').src = null;
+    img.src = null;
     chrome.runtime.sendMessage({
       message: 'data',
       data: 0,
