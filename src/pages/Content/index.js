@@ -90,13 +90,14 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         message: 'data',
         data: data.misMatchPercentage,
       });
+    } else {
+      chrome.runtime.sendMessage({
+        message: 'data',
+        data: 0,
+      });
     }
   } else if (img !== null && request.message === 'clear') {
     data = null;
     img.src = null;
-    chrome.runtime.sendMessage({
-      message: 'data',
-      data: 0,
-    });
   }
 });
