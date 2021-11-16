@@ -4,7 +4,6 @@ import './Popup.css';
 const Popup = () => {
   const [misMatch, setMisMatch] = useState(0);
   const [tabId, setTabId] = useState('');
-  const [history, setHistory] = useState([]);
   useEffect(() => {
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
       let activeTab = tabs[0];
@@ -21,7 +20,6 @@ const Popup = () => {
     sender,
     sendResponse
   ) {
-    setHistory([...history, request.data]);
     if (request.message === 'data') {
       setMisMatch(request.data);
     }
@@ -30,9 +28,6 @@ const Popup = () => {
   return (
     <>
       <div className="App" style={{ color: 'white' }}>
-        {history.map((item, index) => (
-          <h3>{item}</h3>
-        ))}
         {misMatch > 0 ? (
           <>
             <h3>
